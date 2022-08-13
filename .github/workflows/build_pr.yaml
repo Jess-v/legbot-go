@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
 jobs:
   build-pr:
     name: Build PR Check
@@ -13,15 +16,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Find PR
-        uses: 8BitJonny/gh-get-current-pr@2.1.0
-        id: PR
       - name: Docker Login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Docker Build PR
-        run: docker build . --file Dockerfile --tag jessvv/legbot-go:pr_${{ steps.PR.outputs.number }}
+        run: docker build . --file Dockerfile --tag jessvv/legbot-go:pr_$PR_NUMBER
       - name: Docker Push PR
-        run: docker push jessvv/legbot-go:pr_${{ steps.PR.outputs.number }}
+        run: docker push jessvv/legbot-go:pr_$PR_NUMBER
