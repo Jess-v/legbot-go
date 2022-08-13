@@ -5,7 +5,7 @@ on:
     tags:
     - '*'
 
-defaults:
+jobs:
   build-and-push-docker-image:
     name: Build Docker image and push to repo
     runs-on: ubuntu-latest
