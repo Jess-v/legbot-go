@@ -1,0 +1,28 @@
+name: Build PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-pr:
+    name: Build PR Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Find PR
+        uses: jwalton/gh-find-current-pr@v1
+        with:
+          state: open
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker Build PR
+        run: docker build . --file Dockerfile --tag jessvv/legbot-go:pr_${PR}
+      - name: Docker Push PR
+        run: docker push jessvv/legbot-go:pr_${PR}
