@@ -1,4 +1,4 @@
-![Build](https://img.shields.io/github/workflow/status/Jess-v/legbot-go/Build%20and%20Publish%20Image) 
+![Build](https://img.shields.io/github/actions/workflow/status/Jess-v/legbot-go/build_publish.yaml) 
 ![Latest Version](https://img.shields.io/docker/v/jessvv/legbot-go?sort=semver)
 ![Image Pulls](https://img.shields.io/docker/pulls/jessvv/legbot-go)
 ![Docker Stars](https://img.shields.io/docker/stars/jessvv/legbot-go)
