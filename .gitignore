@@ -17,3 +17,4 @@
 *.env
 
 users/*
+docker-compose.yml
