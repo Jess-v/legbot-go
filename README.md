@@ -12,27 +12,25 @@ Do you find yourself struggling to remember which leg you're supposed to inject 
 
 Perhaps legbot-go can help.
 
-This project is an iteration on my original [legbot project](https://github.com/Jess-v/legbot), in an effort to learn Go. Overall it's an incredibly simple bot under the hood (as you can see by taking a peek at main.go) and is a near direct port of my original Python based bot.
+This project is an iteration on my original [legbot project](https://github.com/Jess-v/legbot), in an effort to learn Go.
 
 ## Environment Variables
-| Variable            | Default | Description            | Required? |
-| --------------------|---------|------------------------|-----------|
-| `DISCORD_API_TOKEN` | `None`  | Discord Bot Auth Token | `True`    |
+| Variable            | Default     | Description                                     |
+| --------------------|-------------|-------------------------------------------------|
+| `BOT_TOKEN`         | `None`      | Discord Bot Auth Token                          | 
+| `LOG_LEVEL`         | `info`      | Sets the bot's log level                        | 
+| `DATABASE_HOST`     | `localhost` | Hostname of the connnected Postgres database    |
+| `DATABASE_PORT`     | `5432`      | Connection port of Postgres database            |
+| `DATABASSE_NAME`    | `legbot`    | Name of the postgres database that will be used |
+| `DATABASE_USER`     | `postgres`  | Username of the postgres user that will be used |
+| `DATABASE_PASSWORD` | `postgres`  | Password of the postgres user that will be used |
 
 ## Usage
 
-First, if you do not have a Discord bot token, you will need that first. One guide on how to create one can be found [here](https://www.writebots.com/discord-bot-token/).
+The easiest method of using this bot is to get a Discord API token, and inserting this into the proper variable within the provided `docker-compose.yml`. From there, a simple 
 
-Once you have your API token, create a file named `.env` and insert the following, but with your API token after the equals sign:
-
-```bash
-DISCORD_API_TOKEN=
+```sh
+docker-compose up -d
 ```
 
-Next, decide where you want your folder that stores leg-related data to live. Make note of the path to this folder.
-
-Finally, run the following:
-
-```bash
-docker run --rm --env-file .env -v <YOUR/LOCAL/PATH/TO/FOLDER>:/app/users/ --name="legbot" -d jessvv/legbot-go:latest
-```
+will get the bot up and running. The commands for usage of the bot are `/set`, `/where`, and `/praise`.
