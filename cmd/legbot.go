@@ -167,7 +167,7 @@ func handleSet(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: "There was an error updating your location",
+					Content: "There was an error updating where to apply :(",
 					Flags:   64,
 				},
 			})
@@ -176,10 +176,11 @@ func handleSet(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
-				Content: fmt.Sprintf("Your location has been updated to %s", location),
+				Content: fmt.Sprintf("I'll remember that for ya! Your next dose will be applied to: %s", location),
 				Flags:   64,
 			},
 		})
+		log.Infof("Medication location has been set for user with ID %s", i.Member.User.ID)
 		return
 	} else {
 		err := db.NewUser(i.Member.User.ID, location)
@@ -201,6 +202,7 @@ func handleSet(s *discordgo.Session, i *discordgo.InteractionCreate) {
 				Flags:   64,
 			},
 		})
+		log.Infof("Medication location has been set for user with ID %s", i.Member.User.ID)
 	}
 }
 
@@ -224,6 +226,7 @@ func handleWhere(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			Flags:   64,
 		},
 	})
+	log.Infof("Medication location provided for user with ID %s", i.Member.User.ID)
 }
 
 func handlePraise(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -234,6 +237,7 @@ func handlePraise(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			Flags:   64,
 		},
 	})
+	log.Infof("User %s has praised me!", i.Member.User.ID)
 }
 
 func registerCommands(s *discordgo.Session) {
@@ -243,6 +247,7 @@ func registerCommands(s *discordgo.Session) {
 			log.Error(err)
 		}
 	}
+	log.Infof("Commands registered...")
 }
 
 func removeCommands(s *discordgo.Session) {
@@ -252,4 +257,5 @@ func removeCommands(s *discordgo.Session) {
 			log.Error(err)
 		}
 	}
+	log.Infof("Commands deregistered...")
 }
