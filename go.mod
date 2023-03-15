@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/bwmarrin/discordgo v0.27.1
 	github.com/caarlos0/env v3.5.0+incompatible
-	github.com/jackc/pgx/v5 v5.3.0
+	github.com/jackc/pgx/v5 v5.3.1
 	github.com/sirupsen/logrus v1.9.0
 	go.elastic.co/ecslogrus v1.0.0
 )
